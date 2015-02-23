@@ -4,16 +4,21 @@
 	height: 50px;
 }
 
-#pers:focus {
-    border-color: #9999FF;
-    box-shadow: 0 0 3px #9999FF;
+#pers {
 	margin: 0px;
-	padding: 0px;
+	/*padding: 0px;*/
+}
+
+#pers:focus {
+	outline: none;
+	border: solid 2px white;
+    border-color: #CCCCCC;
+    box-shadow: 0 0 3px #CCCCCC;
 }
 
 #nickname:focus {
-    border-color: #9999FF;
-    box-shadow: 0 0 2px #9999FF;
+    border-color: #CCCCCC;
+    box-shadow: 0 0 2px #CCCCCC;
 }
 
 .header {
@@ -22,6 +27,13 @@
 
 #txtmsg {
 	width: 630px;
+}
+
+#txtmsg:focus {
+	outline: none;
+	border: solid 1px white;
+	border-color: #CCCCCC ;
+    box-shadow: 0 0 3px #CCCCCC;
 }
 
 #sendbutt {
@@ -61,8 +73,8 @@
 }
 
 #chatName:focus {
-    border-color: #9999FF;
-    box-shadow: 0 0 2px #9999FF;
+    border-color: #CCCCCC;
+    box-shadow: 0 0 2px #CCCCCC;
 }
 
 #otherbutt {

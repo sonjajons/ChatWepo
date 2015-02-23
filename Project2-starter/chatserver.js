@@ -79,7 +79,7 @@ io.sockets.on('connection', function (socket) {
 			//Check if the user has been added to the ban list.
 			if(rooms[room].banned[socket.username] !== undefined) {
 				accepted = false;
-				reason = "BANNED";
+				reason = "You have been banned, therefore you cannot see the active users nor chat with them. Hopefully this teaches you a lesson!";
 			}
 			//If accepted is set to true at this point the user is allowed to join the room.
 			if(accepted) {
@@ -140,7 +140,7 @@ io.sockets.on('connection', function (socket) {
 	socket.on('partroom', function (room) {
 		//remove the user from the room roster and room op roster.
 		delete rooms[room].users[socket.username];
-		delete rooms[room].ops[socket.username];
+		//delete rooms[room].ops[socket.username];
 		//Remove the channel from the user object in the global user roster.
 		delete users[socket.username].channels[room];
 		//Update the userlist in the room.

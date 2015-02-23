@@ -6,6 +6,7 @@ ChatClient.config(
 			.when('/login', { templateUrl: 'Views/login.html', controller: 'LoginController' })
 			.when('/rooms/:user/', { templateUrl: 'Views/rooms.html', controller: 'RoomsController' })
 			.when('/room/:user/:room/', { templateUrl: 'Views/room.html', controller: 'RoomController' })
+			.when('/rooms/:user/privatemsg/', { templateUrl: 'Views/privatemsg.html', controller: 'RoomController' })
 			.otherwise({
 	  			redirectTo: '/login'
 			});
@@ -19,7 +20,7 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 
 	$scope.login = function() {			
 		if ($scope.nickname === '') {
-			$scope.errorMessage = 'Please choose a nick-name before continuing!';
+			$scope.errorMessage = 'Please choose a nick-name before entering!';
 		} else {
 			socket.emit('adduser', $scope.nickname, function (available) {
 				if (available) {
@@ -40,6 +41,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.errorMessage = '';
 	$scope.errorMessageBan = '';
 	$scope.chatName = '';
+	var topicobj = {};
 	
 	// Active roomlist
 	socket.emit('rooms', function (){});
@@ -51,15 +53,18 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.newCRoom = function () {
 		if ($scope.chatName === '') {
 			$scope.errorMessage = 'Please choose a name for chat room before continuing!';
-			//console.log("ncromm if");
 		} else {
 			socket.emit('joinroom', { room: $scope.chatName }, function (success, reason) {
-    			var topicobj = {
-    				room: $scope.chatName,
-    				topic: $scope.chatName
-    			};
-    			socket.emit('settopic', topicobj, function (available) {});
-        		$location.path('/room/' + $scope.currentUser + '/' + $scope.chatName);
+				if(!success){
+					$scope.errorMessage = reason;
+				} else {
+					topicobj = {
+						room: $scope.chatName,
+						topic: $scope.chatName
+					};
+					socket.emit('settopic', topicobj, function (available) {});
+		    		$location.path('/room/' + $scope.currentUser + '/' + $scope.chatName);
+				}
 	    	});	
 		}
 
@@ -94,8 +99,10 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 				roomName: $scope.currentRoom,
 				msg: $scope.txtmsg
 			};
-		socket.emit('sendmsg', msgdata, function(){});
-		$scope.txtmsg = '';
+			socket.emit('sendmsg', msgdata, function(){});
+			$scope.txtmsg = '';
+			$("#chatbox").animate({ scrollTop: $(document).height() }, "slow");
+  				return false;
 		}
 	}
 	
