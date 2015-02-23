@@ -1,0 +1,1 @@
+keyra "npm install -d" í verkefnamöppunni til ağ sækja dependencies fyrir chatserver!

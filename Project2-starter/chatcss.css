@@ -1,0 +1,58 @@
+.msg {
+	margin-top: 215px;
+	width: 500px;
+	height: 50px;
+}
+
+#txtmsg {
+	width: 430px;
+}
+
+#sendbutt {
+	margin-left: 10px;
+}
+
+#pers {
+	margin-top: 5px;
+	margin-bottom: 5px; 
+}
+
+#mja {
+	font-weight: bold;
+	color: #6C6C6C;
+}
+
+#messy {
+	margin-left: 20px;
+}
+
+#time {
+	margin-left: 20px;
+	font-weight: lighter;
+	color: gray;
+}
+
+#piss {
+	overflow: scroll;
+	max-height: 300px;
+	height: 300px;
+}
+
+#kickbutt {
+	width: 30px;
+	height: 30px;
+	color: orange;
+	background-image: url("kicku.jpg");
+}
+
+#banbutt {
+	width: 30px;
+	height: 30px;
+	color: red;
+}
+
+#opbutt {
+	width: 30px;
+	height: 30px;
+	color: green;
+}

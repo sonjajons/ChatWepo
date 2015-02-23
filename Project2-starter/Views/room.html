@@ -1,0 +1,40 @@
+<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
+	{{errorMessage}}
+</div>
+
+<h3>Hi {{currentUser}} - Welcome to {{currentRoom}}</h3>
+<div class="col-md-9">
+</br></br>
+	<div class="well" id="piss">
+		<ul>
+			<!--<li ng-repeat-start="(user, msg, value) in txtmsg">user: {{user}}</li>
+			<li ng-repeat-end>lala: {{msg}}</li> -->
+			<li ng-repeat="(message, msgObj) in msgHistory"> <div id="mja">{{msgObj.nick}}: </div>
+			<span id="messy">{{msgObj.message}} </span>
+			<div id="time">{{ msgObj.timestamp | date:'medium'}}</div></li>
+		</ul>
+	</div>
+	</br>
+	<div class="form-group">
+		<input type="text" name="txtmsg" id="txtmsg" ng-model="txtmsg" maxlength="200"/>
+		<button type="button" class="btn btn-primary" id="sendbutt" ng-click="sendmessage()">Send</button>
+	</div>
+</div>
+<div class="col-md-3">
+	<h4>Users in this room</h4>
+	<div class="well">	
+		<ul>
+			<li ng-repeat="user in currentUsers">{{user}}</li>
+		</ul>
+	</div>
+	<div class="form-group" ng-show="(currentOps[currentUser] != undefined)">
+		<h4>You are an operator</h4>
+		<input type="text" name="pers" id="pers" ng-model="pers" placeholder="Type username"/>
+		<span>
+			<button type="button" id="kickbutt" ng-click="kickass()"></button>
+			<button type="button" id="banbutt" ng-click="banish()" class="glyphicon glyphicon-ban-circle"></button>
+			<button type="button" id="opbutt" ng-click="optimus()" class="glyphicon glyphicon-thumbs-up"></button>
+		</span>
+	</div>
+	<button type="button" class="btn btn-primary" ng-click="leave()">Leave chat</button>
+</div>
