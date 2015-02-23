@@ -79,7 +79,7 @@ io.sockets.on('connection', function (socket) {
 			//Check if the user has been added to the ban list.
 			if(rooms[room].banned[socket.username] !== undefined) {
 				accepted = false;
-				reason = "banned";
+				reason = "BANNED";
 			}
 			//If accepted is set to true at this point the user is allowed to join the room.
 			if(accepted) {

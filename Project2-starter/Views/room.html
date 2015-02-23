@@ -1,5 +1,5 @@
-<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
-	{{errorMessage}}
+<div class="alert alert-danger" ng-cloak ng-show="errorMessageBan != ''">
+	{{errorMessageBan}}
 </div>
 
 <h3>Hi <span class="header">{{currentUser}}</span> - Welcome to <span class="header">{{currentRoom}}</span></h3>
@@ -26,11 +26,14 @@
 	</div>
 	<div class="form-group" ng-show="(currentOps[currentUser] != undefined)">
 		<h4>You are an operator</h4>
+		<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
+			{{errorMessage}}
+		</div>
 		<input type="text" name="pers" id="pers" ng-model="pers" placeholder="Type username"/>
 		<span>
-			<button type="button" id="kickbutt" ng-click="kickass()" class="glyphicon glyphicon-warning-sign"></button>
-			<button type="button" id="banbutt" ng-click="banish()" class="glyphicon glyphicon-ban-circle"></button>
-			<button type="button" id="opbutt" ng-click="optimus()" class="glyphicon glyphicon-thumbs-up"></button>
+			<button type="button" id="kickbutt" ng-click="kickass()" class="glyphicon glyphicon-warning-sign" title="KICK USER!"></button>
+			<button type="button" id="banbutt" ng-click="banish()" class="glyphicon glyphicon-ban-circle" title ="BAN USER!"></button>
+			<button type="button" id="opbutt" ng-click="optimus()" class="glyphicon glyphicon-thumbs-up" title ="MAKE OP"></button>
 		</span>
 	</div>
 	<button type="button" class="btn btn-default" ng-click="leave()" id="otherbutt">Leave chat</button>

@@ -38,6 +38,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.currentRoom = $routeParams.room;
 	$scope.rooms = [];
 	$scope.errorMessage = '';
+	$scope.errorMessageBan = '';
 	$scope.chatName = '';
 	
 	// Active roomlist
@@ -49,7 +50,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	// Creating a new room
 	$scope.newCRoom = function () {
 		if ($scope.chatName === '') {
-			$scope.errorMessage = 'Please choose a chat room name before continuing!';
+			$scope.errorMessage = 'Please choose a name for chat room before continuing!';
 			//console.log("ncromm if");
 		} else {
 			socket.emit('joinroom', { room: $scope.chatName }, function (success, reason) {
@@ -72,6 +73,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.currentUsers = [];
 	$scope.currentBans = [];
 	$scope.errorMessage = '';
+	$scope.errorMessageBan = '';
 	$scope.txtmsg = '';
 	$scope.pers = '';
 
@@ -114,7 +116,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	socket.emit('joinroom', {room: $scope.currentRoom}, function (success, reason) {
 		if (!success)
 		{
-			$scope.errorMessage = reason;
+			$scope.errorMessageBan = reason;
 		}
 	});
 
@@ -124,15 +126,24 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		console.log($scope.currentUsers);
 		console.log("room: " + $scope.currentRoom);
 		console.log("kick: " + $scope.pers);
-		kickMe = {
-			user: $scope.pers,
-			room: $scope.currentRoom
-		};
-		socket.emit('kick', kickMe, function (success){
-			if(!success){
-				$scope.errorMessage = "Failed to kick user";
-			}
-		});
+		$scope.errorMessage = '';
+		if($scope.pers === '' || ($scope.currentUsers[$scope.pers] == undefined)){
+			$scope.errorMessage = "Dat aint a valid username foo'";
+		} 
+		else if($scope.pers == $scope.currentUser) {
+			$scope.errorMessage = "Can't kick yo self out";
+		}
+		else {
+			kickMe = {
+				user: $scope.pers,
+				room: $scope.currentRoom
+			};
+			socket.emit('kick', kickMe, function (success){
+				if(!success){
+					$scope.errorMessage = "Failed to kick user";
+				}
+			});
+		}
 		$scope.pers = '';
 	};
 
@@ -145,16 +156,27 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	$scope.banish = function () {
 		console.log("ban: " + $scope.pers);
-		banMe = {
-			user: $scope.pers,
-			room: $scope.currentRoom
+		$scope.errorMessage = '';
+
+		if($scope.pers === '' || ($scope.currentUsers[$scope.pers] == undefined)){
+			$scope.errorMessage = "Dat aint a valid username foo'";
+		} 
+		else if($scope.pers == $scope.currentUser) {
+			$scope.errorMessage = "I aint gonna let u ban yo self!";
+		}
+		else {
+			banMe = {
+				user: $scope.pers,
+				room: $scope.currentRoom
+			}
+
+			socket.emit('ban', banMe, function (success) {
+				if(!success){
+					$scope.errorMessage = "Failed to ban user";
+				}
+			});
 		}
 
-		socket.emit('ban', banMe, function (success) {
-			if(!success){
-				$scope.errorMessage = "Failed to ban user";
-			}
-		});
 		$scope.pers = '';
 	}
 
@@ -167,15 +189,24 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.optimus = function () {
 		console.log("OPTIMUS");
 		console.log("opt: " + $scope.pers);
-		opMe = {
-			user: $scope.pers,
-			room: $scope.currentRoom
+		$scope.errorMessage = '';
+		if($scope.pers === '' || ($scope.currentUsers[$scope.pers] == undefined)){
+			$scope.errorMessage = "Dat aint a valid username foo'";
+		} 
+		else if($scope.pers == $scope.currentUser) {
+			$scope.errorMessage = "U arready opped stupid";
 		}
-		socket.emit('op', opMe, function (success) {
-			if(!success){
-				$scope.errorMessage = "Failed to upgrade user to operator";
+		else {
+			opMe = {
+				user: $scope.pers,
+				room: $scope.currentRoom
 			}
-		});
+			socket.emit('op', opMe, function (success) {
+				if(!success){
+					$scope.errorMessage = "Failed to upgrade user to operator";
+				}
+			});
+		}
 		$scope.pers = '';
 	}
 

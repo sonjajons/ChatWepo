@@ -4,6 +4,18 @@
 	height: 50px;
 }
 
+#pers:focus {
+    border-color: #9999FF;
+    box-shadow: 0 0 3px #9999FF;
+	margin: 0px;
+	padding: 0px;
+}
+
+#nickname:focus {
+    border-color: #9999FF;
+    box-shadow: 0 0 2px #9999FF;
+}
+
 .header {
 	color: #9999FF;
 }
@@ -48,6 +60,11 @@
 	width: 700px;
 }
 
+#chatName:focus {
+    border-color: #9999FF;
+    box-shadow: 0 0 2px #9999FF;
+}
+
 #otherbutt {
 	border: #9999FF solid 2px;
 }
@@ -55,7 +72,7 @@
 #kickbutt {
 	width: 30px;
 	height: 30px;
-	color: orange;
+	color: #9999FF;
 	background-color: white;
 	border: none;
 }
@@ -63,7 +80,7 @@
 #banbutt {
 	width: 30px;
 	height: 30px;
-	color: red;
+	color: #9999FF;
 	background-color: white;
 	border: none;
 }
@@ -71,7 +88,7 @@
 #opbutt {
 	width: 30px;
 	height: 30px;
-	color: green;
+	color: #9999FF;
 	background-color: white;
 	border: none;
 }
