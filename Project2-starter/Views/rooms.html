@@ -5,11 +5,14 @@
 	</ul> -->
 
 	<ul ng-repeat="(room, value) in rooms">
-		<li><a href="#/room/{{currentUser}}/{{room}}">{{value.topic}}</a></li>
+		<li><a href="#/room/{{currentUser}}/{{room}}" id="topic">{{value.topic}}</a></li>
 	</ul>
 </div>
 <div class="form-group">
+	<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
+		{{errorMessage}}
+	</div>
 	<label for="chatName" class="control-label">Chat room name: </label>
 	<input type="text" class="form-control" id="chatName" name="chatName" ng-model="chatName" />
 </div>
-<button type="button" class="btn btn-primary" ng-click="newCRoom()">New chat room</button>
+<button type="button" class="btn btn-default" ng-click="newCRoom()" id="otherbutt">New chat room</button>

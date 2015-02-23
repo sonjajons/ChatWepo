@@ -50,7 +50,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.newCRoom = function () {
 		if ($scope.chatName === '') {
 			$scope.errorMessage = 'Please choose a chat room name before continuing!';
-			console.log("ncromm if");
+			//console.log("ncromm if");
 		} else {
 			socket.emit('joinroom', { room: $scope.chatName }, function (success, reason) {
     			var topicobj = {
@@ -85,12 +85,16 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	// Send message
 	$scope.sendmessage = function () {
-		msgdata = {
-			roomName: $scope.currentRoom,
-			msg: $scope.txtmsg
-		};
+		if($scope.txtmsg === ''){
+		}
+		else {
+			msgdata = {
+				roomName: $scope.currentRoom,
+				msg: $scope.txtmsg
+			};
 		socket.emit('sendmsg', msgdata, function(){});
 		$scope.txtmsg = '';
+		}
 	}
 	
 	// Update chat after message sent
@@ -126,7 +130,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		};
 		socket.emit('kick', kickMe, function (success){
 			if(!success){
-				console.log("Failed to kick " + $scope.pers);
+				$scope.errorMessage = "Failed to kick user";
 			}
 		});
 		$scope.pers = '';
@@ -148,11 +152,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 		socket.emit('ban', banMe, function (success) {
 			if(!success){
-				console.log("Failed to ban " + $scope.pers);
-			}
-			else {
-				$scope.currentBans = $scope.pers;
-				console.log("Great ban-success" + $scope.currentBans);
+				$scope.errorMessage = "Failed to ban user";
 			}
 		});
 		$scope.pers = '';
@@ -172,25 +172,15 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			room: $scope.currentRoom
 		}
 		socket.emit('op', opMe, function (success) {
-			if(!success) {
-				console.log("Failed to op " + $scope.pers);
-			}
-			else {
-				console.log("Successful op " + $scope.pers);
+			if(!success){
+				$scope.errorMessage = "Failed to upgrade user to operator";
 			}
 		});
 		$scope.pers = '';
 	}
 
 	socket.on('opped', function (room, uzer, uzername) {
-		console.log(uzer);
-		//if(uzer === $scope.currentUser) {
-			//console.log("OPPED");
-			console.log($scope.currentOps);
-			$scope.currentOps += uzer;
-			//$location.path('/room/' + $scope.currentUser + '/' + $scope.chatName);
-			console.log($scope.currentOps);
-		//}
+			$scope.currentOps = uzer;
 	});
 
 

@@ -4,12 +4,17 @@
 	height: 50px;
 }
 
+.header {
+	color: #9999FF;
+}
+
 #txtmsg {
-	width: 430px;
+	width: 630px;
 }
 
 #sendbutt {
 	margin-left: 10px;
+	border: #9999FF solid 2px;
 }
 
 #pers {
@@ -17,9 +22,9 @@
 	margin-bottom: 5px; 
 }
 
-#mja {
+#user {
 	font-weight: bold;
-	color: #6C6C6C;
+	color: #9999FF;
 }
 
 #messy {
@@ -32,27 +37,41 @@
 	color: gray;
 }
 
-#piss {
+#topic {
+	color: #9999FF;
+}
+
+#chatbox {
 	overflow: scroll;
 	max-height: 300px;
 	height: 300px;
+	width: 700px;
+}
+
+#otherbutt {
+	border: #9999FF solid 2px;
 }
 
 #kickbutt {
 	width: 30px;
 	height: 30px;
 	color: orange;
-	background-image: url("kicku.jpg");
+	background-color: white;
+	border: none;
 }
 
 #banbutt {
 	width: 30px;
 	height: 30px;
 	color: red;
+	background-color: white;
+	border: none;
 }
 
 #opbutt {
 	width: 30px;
 	height: 30px;
 	color: green;
+	background-color: white;
+	border: none;
 }
