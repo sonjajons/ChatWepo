@@ -104,3 +104,7 @@
 	background-color: white;
 	border: none;
 }
+
+ul {
+	list-style-type: none;
+}

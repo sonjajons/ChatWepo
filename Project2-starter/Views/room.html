@@ -1,6 +1,15 @@
 <div class="alert alert-danger" ng-cloak ng-show="errorMessageBan != ''">
 	{{errorMessageBan}}
 </div>
+<div class="alert alert-success" id="success-alert">
+	<strong>Super! </strong> {{wasopped}} has been upgraded to an operator
+</div>
+<div class="alert alert-warning" id="warning-alert">
+	<strong>Uh-oh</strong> {{waskicked}} has been kicked from {{currentRoom}}
+</div>
+<div class="alert alert-danger" id="danger-alert">
+	<strong>Someone's been naughty!</strong> {{wasbanned}} has been banned from {{currentRoom}}
+</div>
 
 <div>
 	<h3>Hi <span class="header">{{currentUser}}</span> - Welcome to <span class="header">{{currentRoom}}</span></h3>

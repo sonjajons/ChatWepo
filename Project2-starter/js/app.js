@@ -1,5 +1,10 @@
 var ChatClient = angular.module('ChatClient', ['ngRoute']);
 
+var global = {
+	iskicked: false,
+	isBanned: false,
+}
+
 ChatClient.config(
 	function ($routeProvider) {
 		$routeProvider
@@ -35,6 +40,20 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 
 ChatClient.controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
 	// √ TODO: Query chat server for active rooms
+$(document).ready (function(){
+    $("#warning-alert").hide();
+    $("#danger-alert").hide();
+ });
+
+function showKicked() {
+    $("#warning-alert").alert();
+    $("#warning-alert").fadeTo(2500, 500).slideUp(1000, function(){ });   
+}
+function showBanned() {
+    $("#danger-alert").alert();
+    $("#danger-alert").fadeTo(2500, 500).slideUp(1000, function(){});   
+}
+
 	$scope.currentUser = $routeParams.user;
 	$scope.currentRoom = $routeParams.room;
 	$scope.rooms = [];
@@ -48,6 +67,17 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	socket.on('roomlist', function (rooms){
 		$scope.rooms = rooms;
 	});
+
+	if(global.iskicked){
+		console.log("kickedy rooms");
+		showKicked();
+		global.iskicked = false;
+	}
+
+	if(global.isBanned){
+		showBanned();
+		global.isBanned = false;
+	}
 
 	// Creating a new room
 	$scope.newCRoom = function () {
@@ -72,6 +102,28 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 });
 
 ChatClient.controller('RoomController', function ($scope, $location, $rootScope, $routeParams, socket) {
+$(document).ready (function(){
+    $("#success-alert").hide();
+    $("#warning-alert").hide();
+    $("#danger-alert").hide();
+ });
+
+function showAlert() {
+    $("#success-alert").alert();
+    $("#success-alert").fadeTo(2500, 500).slideUp(1000, function(){});   
+}
+
+function showKicked() {
+    $("#warning-alert").alert();
+    $("#warning-alert").fadeTo(2500, 500).slideUp(1000, function(){});   
+}
+
+function showBanned() {
+    $("#danger-alert").alert();
+    $("#danger-alert").fadeTo(2500, 500).slideUp(1000, function(){});   
+}
+
+
 	$scope.currentRoom = $routeParams.room;
 	$scope.currentUser = $routeParams.user;
 	$scope.currentOps = [];
@@ -81,6 +133,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.errorMessageBan = '';
 	$scope.txtmsg = '';
 	$scope.pers = '';
+	$scope.wasopped = '';
+	$scope.waskicked = '';
+	$scope.wasbanned = '';
 
 	var kickMe = {};
 	var banMe = {};
@@ -141,6 +196,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			$scope.errorMessage = "Can't kick yo self out";
 		}
 		else {
+			$scope.waskicked = $scope.pers;
 			kickMe = {
 				user: $scope.pers,
 				room: $scope.currentRoom
@@ -156,8 +212,10 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	socket.on('kicked', function (room, uzer, uzername) {
 		if(uzer === $scope.currentUser) {
+			iskicked = true;
 			$location.path('/rooms/' + $scope.currentUser + '/');
 		}
+		showKicked();
 	});	
 
 
@@ -172,6 +230,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			$scope.errorMessage = "I aint gonna let u ban yo self!";
 		}
 		else {
+			$scope.wasbanned = $scope.pers;
 			banMe = {
 				user: $scope.pers,
 				room: $scope.currentRoom
@@ -189,8 +248,10 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	socket.on('banned', function (room, uzer, uzername) {
 		if(uzer === $scope.currentUser) {
+			global.isBanned = true;
 			$location.path('/rooms/' + $scope.currentUser + '/');
 		}
+		showBanned();
 	});
 
 	$scope.optimus = function () {
@@ -200,10 +261,11 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		if($scope.pers === '' || ($scope.currentUsers[$scope.pers] == undefined)){
 			$scope.errorMessage = "Dat aint a valid username foo'";
 		} 
-		else if($scope.pers == $scope.currentUser) {
-			$scope.errorMessage = "U arready opped stupid";
+		else if($scope.pers == $scope.currentUser || ($scope.currentOps[$scope.pers] != undefined)) {
+			$scope.errorMessage = "This user has already been opped";
 		}
 		else {
+			$scope.wasopped = $scope.pers;
 			opMe = {
 				user: $scope.pers,
 				room: $scope.currentRoom
@@ -214,11 +276,13 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 				}
 			});
 		}
+		console.log($scope.wasopped);
 		$scope.pers = '';
 	}
 
 	socket.on('opped', function (room, uzer, uzername) {
-			$scope.currentOps = uzer;
+		showAlert();
+		$scope.currentOps = uzer;
 	});
 
 
