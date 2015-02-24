@@ -215,6 +215,7 @@ function showBanned() {
 			iskicked = true;
 			$location.path('/rooms/' + $scope.currentUser + '/');
 		}
+		$scope.wasopped = uzer;
 		showKicked();
 	});	
 
@@ -251,6 +252,7 @@ function showBanned() {
 			global.isBanned = true;
 			$location.path('/rooms/' + $scope.currentUser + '/');
 		}
+		$scope.wasopped = uzer;
 		showBanned();
 	});
 
@@ -281,6 +283,7 @@ function showBanned() {
 	}
 
 	socket.on('opped', function (room, uzer, uzername) {
+		$scope.wasopped = uzer;
 		showAlert();
 		$scope.currentOps = uzer;
 	});
