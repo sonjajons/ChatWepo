@@ -10,8 +10,8 @@
 		<li><a href="#/room/{{currentUser}}/{{room}}">{{room}}</a></li>
 	</ul> -->
 
-	<ul ng-repeat="(room, value) in rooms">
-		<li><a href="#/room/{{currentUser}}/{{room}}" id="topic">{{value.topic}}</a></li>
+	<ul class="list-group" ng-repeat="(room, value) in rooms">
+		<li><a href="#/room/{{currentUser}}/{{room}}" class="list-group-item" id="topic">{{value.topic}}</a></li>
 	</ul>
 </div>
 <div class="form-group">
