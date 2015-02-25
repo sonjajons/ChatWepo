@@ -1,20 +1,25 @@
-<div class="container">
-	<div class="col-md-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">Choose your nick</div>
-			<div class="panel-body">
+<div id="background"> 
+	<div class="container">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+		</br></br></br></br>
+			<div class="panel panel-default" id="login">
+				<div class="panel-heading">Choose your nick</div>
+				<div class="panel-body">
 
-				<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
-					{{errorMessage}}
+					<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
+						{{errorMessage}}
+					</div>
+
+					<div class="form-group">
+						<label for="nickname" class="control-label">Nick-name</label>
+						<input type="text" class="form-control" id="nickname" name="nickname" ng-model="nickname" autofocus/>
+					</div>
+
+					<button type="button" class="btn btn-default" ng-click="login()" id="otherbutt">Enter chat</button>
 				</div>
-
-				<div class="form-group">
-					<label for="nickname" class="control-label">Nick-name</label>
-					<input type="text" class="form-control" id="nickname" name="nickname" ng-model="nickname" />
-				</div>
-
-				<button type="button" class="btn btn-default" ng-click="login()" id="otherbutt">Enter chat</button>
 			</div>
 		</div>
+		<div class="col-md-4"></div>
 	</div>
 </div>

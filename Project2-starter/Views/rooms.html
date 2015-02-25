@@ -1,24 +1,49 @@
 <div class="alert alert-warning" id="warning-alert">
-	<strong>Uh-oh!</strong> You've been kicked from the chat room
+	<strong>Uh-oh!</strong> You've been kicked from {{lastroom}}
 </div>
 <div class="alert alert-danger" id="danger-alert">
-	<strong>Someone's been naughty!</strong> You've been banned from the chat room
+	<strong>Someone's been naughty!</strong> You've been banned from {{lastroom}}
 </div>
-<h3>Hi <span class="header">{{currentUser}}</span> - Active chat rooms</h3>
-<div class="well">
-	<!--<ul ng-repeat="room in rooms">
-		<li><a href="#/room/{{currentUser}}/{{room}}">{{room}}</a></li>
-	</ul> -->
+<div class="col-md-1"></div>
+<div class="col-md-10">
+	<h3>Hi {{currentUser}} - Active chat rooms</h3>
+	</br>
+	<div class="well">
+		<!--<ul ng-repeat="room in rooms">
+			<li><a href="#/room/{{currentUser}}/{{room}}">{{room}}</a></li>
+		</ul> -->
 
-	<ul class="list-group" ng-repeat="(room, value) in rooms">
-		<li><a href="#/room/{{currentUser}}/{{room}}" class="list-group-item" id="topic">{{value.topic}}</a></li>
-	</ul>
-</div>
-<div class="form-group">
-	<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
-		{{errorMessage}}
+		<ul class="list-group" ng-repeat="(room, value) in rooms">
+			<li><a href="#/room/{{currentUser}}/{{room}}" class="list-group-item" id="topic">{{value.topic}}</a></li>
+		</ul>
 	</div>
-	<label for="chatName" class="control-label">Chat room name: </label>
-	<input type="text" class="form-control" id="chatName" name="chatName" ng-model="chatName" />
+	<div class="well" id="login">
+		<div class="form-group">
+			<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
+				{{errorMessage}}
+			</div>
+			<label for="chatName" class="control-label">Chat room name: </label>
+			<input type="text" class="form-control" id="chatName" name="chatName" ng-model="chatName" autofocus/>
+		</div>
+	<button type="button" class="btn btn-default" ng-click="newCRoom()" id="otherbutt">New chat room</button>
+	</div>
 </div>
-<button type="button" class="btn btn-default" ng-click="newCRoom()" id="otherbutt">New chat room</button>
+<div class="col-md-1"></div>
+<!--
+
+<div class="panel panel-default" id="login">
+				<div class="panel-heading">Choose your nick</div>
+				<div class="panel-body">
+
+					<div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
+						{{errorMessage}}
+					</div>
+
+					<div class="form-group">
+						<label for="nickname" class="control-label">Nick-name</label>
+						<input type="text" class="form-control" id="nickname" name="nickname" ng-model="nickname" />
+					</div>
+
+					<button type="button" class="btn btn-default" ng-click="login()" id="otherbutt">Enter chat</button>
+				</div>
+			</div> -->

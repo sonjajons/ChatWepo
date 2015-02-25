@@ -1,1 +1,22 @@
-<p>HELLO WORLD</p>
+<div class="col-md-1"></div>
+<div>
+	<div class="col-md-8">
+		<h3>{{currentUser}}'s - Private chat with <strong>{{sendto}}</strong></h3>
+		</br>
+		</br>
+		<div class="well" id="chatbox">
+			<ul>
+				<li ng-repeat="(message, privObj) in privHistory"> <div id="user">{{privObj.nick}}: </div>
+				<span id="messy">{{privObj.message}} </span></li>
+			</ul>
+		</div>
+		<div class="form-group">
+			<input type="text" name="privmsg" id="privmsg" ng-model="privmsg" maxlength="200"/>
+			<button type="button" class="btn btn-default" id="sendbutt" ng-click="sendpriv()" >Send</button>
+		</div>
+	</div>
+	</br></br></br></br></br>
+	<div class="col-md-3">
+		<button type="button" class="btn btn-default" ng-click="leavePriv()" id="otherbutt">Leave private chat</button>
+	</div>
+</div>
