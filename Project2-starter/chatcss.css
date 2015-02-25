@@ -1,3 +1,20 @@
+* {
+	font-family: 'Courier New';
+}
+
+body {
+	/*Source for background picture:
+	http://4.bp.blogspot.com/-5NDngMp8T-I/UHc9k5vU4CI/AAAAAAAADuE/REtSXk2Qvtw/s1600/Iceland30.jpg*/
+	background-image: url("Iceland30.jpg");
+	//background-size: 100%;
+	//background-repeat: no-repeat;
+}
+
+.well {
+	opacity: 0.9;
+}
+
+
 .msg {
 	margin-top: 215px;
 	width: 500px;
@@ -6,6 +23,7 @@
 
 #pers {
 	margin: 0px;
+	font-weight: lighter;
 	/*padding: 0px;*/
 }
 
@@ -21,10 +39,6 @@
     box-shadow: 0 0 2px #CCCCCC;
 }
 
-.header {
-	color: #9999FF;
-}
-
 #txtmsg {
 	width: 630px;
 }
@@ -36,9 +50,21 @@
     box-shadow: 0 0 3px #CCCCCC;
 }
 
+#privmsg{
+	width: 630px;
+}
+
+#privmsg:focus {
+	outline: none;
+	border: solid 1px white;
+	border-color: #CCCCCC ;
+    box-shadow: 0 0 3px #CCCCCC;
+}
+
 #sendbutt {
 	margin-left: 10px;
 	border: #9999FF solid 2px;
+	font-style: lighter;
 }
 
 #pers {
@@ -63,6 +89,15 @@
 
 #topic {
 	color: #9999FF;
+	border: none;
+}
+
+#topic:hover {
+	background-color: white;
+	margin: 0px;
+	outline: none;
+    border-color: #CCCCCC;
+    box-shadow: 0 0 5px #CCCCCC;
 }
 
 #chatbox {
@@ -75,33 +110,48 @@
 #chatName:focus {
     border-color: #CCCCCC;
     box-shadow: 0 0 2px #CCCCCC;
+    opacity: 1;
 }
 
 #otherbutt {
 	border: #9999FF solid 2px;
+	background-color: white;
 }
 
 #kickbutt {
-	width: 30px;
-	height: 30px;
+	width: 20px;
+	height: 20px;
 	color: #9999FF;
-	background-color: white;
+	background-color: transparent;
 	border: none;
 }
 
 #banbutt {
-	width: 30px;
-	height: 30px;
+	width: 20px;
+	height: 20px;
 	color: #9999FF;
-	background-color: white;
+	background-color: transparent;
+	border: none;
+}
+
+#vs {
+	color: #9999FF;
+	font-weight: bold;
+}
+
+#msgbutt {
+	width: 20px;
+	height: 20px;
+	color: #9999FF;
+	background-color: transparent;
 	border: none;
 }
 
 #opbutt {
-	width: 30px;
-	height: 30px;
+	width: 20px;
+	height: 20px;
 	color: #9999FF;
-	background-color: white;
+	background-color: transparent;
 	border: none;
 }
 

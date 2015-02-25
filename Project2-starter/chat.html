@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="allback">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
-	<meta name="author" content="Haukur H. Þórsson">
+	<meta name="author" content="Haukur H. Þórsson, Sonja Jónsdóttir, Valgerður Rós Morthens">
 
-	<title>WEPO 2015 - Skilaverkefni 2</title>
+	<title> Chat for tourists in Iceland </title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="chatcss.css"/>
@@ -15,6 +15,10 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.min.js"></script>
 	<script type="text/javascript" src="js/socket.io.min.js"></script>	
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/LoginController.js"></script>
+	<script type="text/javascript" src="js/controllers/RoomsController.js"></script>
+	<script type="text/javascript" src="js/controllers/RoomController.js"></script>
+	<script type="text/javascript" src="js/controllers/PrivateMsgController.js"></script>
 	<script type="text/javascript" src="js/socket-factory.js"></script>		
 </head>
 <body ng-app="ChatClient">
@@ -28,12 +32,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-			  	<a class="navbar-brand" href="#">ChatClient</a>
+			  	<a class="navbar-brand" href="#"><span id="vs">ICE</span>Chat</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#/">Back to login</a></li>
-					<li class="active"><a href="#/">Private Message</a></li>
 				</ul>
 			</div>
 		</div>
